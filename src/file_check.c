@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 #include <unistd.h>
 
 int	is_ber_file(char	*file)
@@ -36,11 +36,11 @@ int	is_ber_file(char	*file)
 	}
 }
 
-int	file_exists(char	*filename)
+int	file_exists(char	*file)
 {
 	int	fd;
 
-	fd = open(argv[1], O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
 		write(2, "File does not exists or cannot be open\n", 39);
