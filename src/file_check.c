@@ -19,20 +19,20 @@ int	is_ber_file(char	*file)
 
 	len = 0;
 	if (file == NULL)
-		return (0);
+		return (FAILURE);
 
 	len = ft_strlen(file);
 	if (len <= 4)
 	{
 		write(2, "Unvalid file\n", 13);
-		return (0);
+		return (FAILURE);
 	}
 	if (ft_strncmp(file + len - 4, ".ber", 4) == 0)
-		return (1);
+		return (SUCCESS);
 	else
 	{
 		write(2, "Incorrect extension file\n", 25);
-		return (0);
+		return (FAILURE);
 	}
 }
 
@@ -44,8 +44,8 @@ int	file_exists(char	*file)
 	if (fd < 0)
 	{
 		write(2, "File does not exists or cannot be open\n", 39);
-		return (0);
+		return (FAILURE);
 	}
 	close(fd);
-	return (1);
+	return (SUCCESS);
 }
