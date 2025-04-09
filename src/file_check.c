@@ -49,3 +49,4 @@ int	file_exists(char	*file)
 	close(fd);
 	return (SUCCESS);
 }
+
