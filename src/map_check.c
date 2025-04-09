@@ -13,64 +13,50 @@
 #include "../includes/so_long.h"
 #include <unistd.h>
 
-int	count_line(char *file)
+int	count_line(char *file, t_data *game)
 {
-	int	fd;
-	int	count;
-	char	*line;
+	int		fd;
+	char	*buf;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (0);
-
-	count = 0;
-	while ((line = get_next_line(fd)) != NULL)
 	{
-		count++;
-		free(line);
+		write(2, "Error\nCouldn't open file\n", 25);
+		return (FAILURE);
 	}
-	return (count);
+	buf = get_next_line(fd);
+	while (buf)
+	{
+		game->line_count++;
+		free(buf);
+		buf = get_next_line(fd);
+	}
+	close(fd);
+	return (game->line_count);
 }
 
-char **parse_map(char *file)
+bool    parse_map(char *file, t_data *game)
 {
-	int fd;
-	int i;
-	char **map;
-	char *line;
+	int        fd;
+	int        i;
+	char    *line;
 
 	i = 0;
-	int line_count = count_line(file);
-
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (NULL);
-
-	map = malloc(sizeof(char *) * (line_count + 1));
-	if (!map)
+		return (FAILURE);
+	game->map = malloc(sizeof(char *) * (game->line_count + 1));
+	if (!game->map)
+		return (close(fd), FAILURE);
+	while (i < game->line_count)
 	{
-		close(fd);
-		return (NULL);
+		line = get_next_line(fd);
+		if (line == NULL)
+			return (close(fd), FAILURE);
+		game->map[i++] = line;
 	}
-
-	close(fd);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		free(map);
-		return (NULL);
-	}
-
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		map[i] = line;
-		i++;
-	}
-	map[i] = NULL;
-
-
-	close(fd);
-	return (map);
+	game->map[i] = NULL;
+	return (close(fd), SUCCESS);
 }
 
 
