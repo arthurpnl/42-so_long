@@ -7,12 +7,13 @@
 # define FAILURE 0
 
 // file check //
-int	is_ber_file(char	*file);
-int	file_exists(char	*file);
+bool	is_ber_file(char	*file);
+bool	is_regular_file(char *file);
 
 // map check //
 bool    parse_map(char *file, t_data	*game);
-int	count_line(char *file, t_data *game);
+bool	count_line(char *file, t_data *game)
+
 
 typedef struct s_data
 {
