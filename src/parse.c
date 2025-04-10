@@ -16,8 +16,8 @@ int	parser(t_data	*game, char	**av)
 {
 	if (is_ber_file(*av) == FAILURE)
 		return (FAILURE);
-	if (file_exists(*av) == FAILURE)
-		return (FAILURE);
+	if (count_line(*av, game) == FAILURE)
+        return (FAILURE);
 	if (parse_map(*av, game) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
