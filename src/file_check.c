@@ -13,7 +13,7 @@
 #include "../includes/so_long.h"
 #include <unistd.h>
 
-int	is_ber_file(char	*file)
+bool	is_ber_file(char	*file)
 {
 	int	len;
 
@@ -40,7 +40,7 @@ int	is_ber_file(char	*file)
 		return (FAILURE);
 }
 
-int	is_regular_file(char *file)
+bool	is_regular_file(char *file)
 {
 	int	fd;
 	char	buffer[1];
@@ -61,18 +61,3 @@ int	is_regular_file(char *file)
 	}
 	return (SUCCESS);
 }
-
-int	file_exists(char	*file)
-{
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-	{
-		write(2, "File does not exists or cannot be open\n", 39);
-		return (FAILURE);
-	}
-	close(fd);
-	return (SUCCESS);
-}
-
