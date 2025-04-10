@@ -20,5 +20,7 @@ int	parser(t_data	*game, char	**av)
         return (FAILURE);
 	if (parse_map(*av, game) == FAILURE)
 		return (FAILURE);
+	if (is_rectangular_map(game) == FAILURE)
+        return (FAILURE);
 	return (SUCCESS);
 }
