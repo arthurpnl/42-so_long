@@ -59,4 +59,27 @@ bool    parse_map(char *file, t_data *game)
 	return (close(fd), SUCCESS);
 }
 
+bool	is_rectangular_map(t_data *game)
+{
+	int	i;
+	int    len;
+
+	i = 0;
+	game->len_line = ft_strlen(game->map[0]);
+	while(i < game->line_count)
+	{
+		len = ft_strlen(game->map[i]);
+		if (len != game->len_line)
+		{
+			write(2, "Error\nUnvalid Map\n", 18);
+			return (FAILURE);
+		}
+		i++;
+	}
+	return (SUCCESS);
+}
+
+
+
+
 
