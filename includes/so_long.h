@@ -6,15 +6,6 @@
 # define SUCCESS 1
 # define FAILURE 0
 
-// file check //
-bool	is_ber_file(char	*file);
-bool	is_regular_file(char *file);
-
-// map check //
-bool    parse_map(char *file, t_data	*game);
-bool	count_line(char *file, t_data *game)
-
-
 typedef struct s_data
 {
     char    **map;
@@ -27,5 +18,18 @@ typedef struct s_data
     int     collectible_count;
     int     player_count;
 } t_data;
+
+
+// file check //
+bool	is_ber_file(char	*file);
+bool	is_regular_file(char *file);
+
+// map check //
+bool    parse_map(char *file, t_data	*game);
+bool	count_line(char *file, t_data *game);
+bool	is_rectangular_map(t_data *game);
+
+// init game //
+void	init_game(t_data *game);
 
 #endif
