@@ -14,7 +14,7 @@
 
 void	init_game(t_data *game)
 {
-	game->map = NULL;
+	game->map = "NULL";
 	game->line_count = 0;
 	game->len_line = 0;
 	game->size_map = 0;

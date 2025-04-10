@@ -13,52 +13,6 @@
 #include "../includes/so_long.h"
 #include <unistd.h>
 
-bool	count_line(char *file, t_data *game)
-{
-	int		fd;
-	char	*buf;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		write(2, "Error\nCouldn't open file\n", 25);
-		return (FAILURE);
-	}
-	buf = get_next_line(fd);
-	while (buf)
-	{
-		game->line_count++;
-		free(buf);
-		buf = get_next_line(fd);
-	}
-	close(fd);
-	return (SUCCESS);
-}
-
-bool    parse_map(char *file, t_data *game)
-{
-	int        fd;
-	int        i;
-	char    *line;
-
-	i = 0;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (FAILURE);
-	game->map = malloc(sizeof(char *) * (game->line_count + 1));
-	if (!game->map)
-		return (close(fd), FAILURE);
-	while (i < game->line_count)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			return (close(fd), FAILURE);
-		game->map[i++] = line;
-	}
-	game->map[i] = NULL;
-	return (close(fd), SUCCESS);
-}
-
 bool	is_rectangular_map(t_data *game)
 {
 	int	i;
@@ -77,6 +31,38 @@ bool	is_rectangular_map(t_data *game)
 		i++;
 	}
 	return (SUCCESS);
+}
+
+bool	check_horizontal_walls(t_data *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < game->len_line)
+	{
+		if (game->map[0][i] == '1')
+			i++;
+		else
+			return (write(2, "Error\nInvalid Map\n", 18), FAILURE);
+	}
+	while (j < game->len_line)
+	{
+		if (game->map[game->line_count - 1][j] == '1')
+			i++;
+		else
+			return (write(2, "Error\nInvalid Map\n", 18), FAILURE);
+	}
+	return (SUCCESS);
+}
+
+bool	check_vertical_walls(t_data	*game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
 }
 
 

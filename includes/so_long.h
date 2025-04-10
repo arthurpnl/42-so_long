@@ -24,10 +24,13 @@ typedef struct s_data
 bool	is_ber_file(char	*file);
 bool	is_regular_file(char *file);
 
-// map check //
+// map parse //
 bool    parse_map(char *file, t_data	*game);
 bool	count_line(char *file, t_data *game);
+
+// map validation //
 bool	is_rectangular_map(t_data *game);
+
 
 // init game //
 void	init_game(t_data *game);
