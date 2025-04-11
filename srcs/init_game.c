@@ -24,3 +24,12 @@ void	init_game(t_data *game)
 	game->collectible_count = 0;
 	game->player_count = 0;
 }
+
+void	init_game_path(t_path_check *path)
+{
+	path->visited = NULL;
+	path->collectible_found = 0;
+	path->exit_found = 0;
+	path->i = 0;
+	path->j = 0;
+}
