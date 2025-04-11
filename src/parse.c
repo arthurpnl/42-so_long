@@ -22,5 +22,10 @@ int	parser(t_data	*game, char	**av)
 		return (FAILURE);
 	if (is_rectangular_map(game) == FAILURE)
         return (FAILURE);
+    if (check_horizontal_walls(game) == FAILURE)
+       	return (FAILURE);
+    if (check_vertical_walls(game) == FAILURE)
+    	return (FAILURE);
+
 	return (SUCCESS);
 }
