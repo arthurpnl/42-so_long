@@ -60,10 +60,24 @@ bool	check_horizontal_walls(t_data *game)
 bool	check_vertical_walls(t_data	*game)
 {
 	int	i;
-	int	j;
 
 	i = 0;
+	while(i < game->line_count)
+	{
+		if (game->map[i][0] != '1')
+			return (ft_printf("Error\nInvalid Map\n"), FAILURE);
+		if (game->map[i][game->len_line - 1] != '1')
+			return (ft_printf("Error\nInvalid Map\n"), FAILURE);
+		i++;
+	}
+	return (SUCCESS);
 }
+
+bool	check_collectible(t_data *game)
+{
+
+}
+
 
 
 
