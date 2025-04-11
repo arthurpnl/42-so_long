@@ -21,7 +21,7 @@ bool	count_line(char *file, t_data *game)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		write(2, "Error\nCouldn't open file\n", 25);
+		ft_printf("Error\nCouldn't open file\n");
 		return (FAILURE);
 	}
 	buf = get_next_line(fd);

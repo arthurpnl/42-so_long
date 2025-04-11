@@ -26,6 +26,11 @@ int	parser(t_data	*game, char	**av)
        	return (FAILURE);
     if (check_vertical_walls(game) == FAILURE)
     	return (FAILURE);
-
+    if (check_collectible(game) == FAILURE)
+        return (FAILURE);
+    if (check_exit(game) == FAILURE)
+        return (FAILURE);
+    if (check_start_position(game) == FAILURE)
+        return (FAILURE);
 	return (SUCCESS);
 }
