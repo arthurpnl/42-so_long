@@ -30,6 +30,8 @@ bool	count_line(char *file, t_data *game);
 
 // map validation //
 bool	is_rectangular_map(t_data *game);
+bool	check_horizontal_walls(t_data *game);
+bool	check_vertical_walls(t_data	*game);
 
 
 // init game //
