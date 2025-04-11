@@ -12,7 +12,7 @@
 
 #include "../includes/so_long.h"
 
-void	init_game(t_data *game)
+void	init_game(t_game *game)
 {
 	game->map = "NULL";
 	game->line_count = 0;
@@ -25,7 +25,7 @@ void	init_game(t_data *game)
 	game->player_count = 0;
 }
 
-void	init_game_path(t_path_check *path)
+void	init_game_path(t_pathfinder *path)
 {
 	path->visited = NULL;
 	path->collectible_found = 0;

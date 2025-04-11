@@ -13,7 +13,7 @@
 #include "../includes/so_long.h"
 #include <unistd.h>
 
-bool	count_line(char *file, t_data *game)
+bool	count_line(char *file, t_game *game)
 {
 	int		fd;
 	char	*buf;
@@ -35,7 +35,7 @@ bool	count_line(char *file, t_data *game)
 	return (SUCCESS);
 }
 
-bool    parse_map(char *file, t_data *game)
+bool    parse_map(char *file, t_game *game)
 {
 	int        fd;
 	int        i;

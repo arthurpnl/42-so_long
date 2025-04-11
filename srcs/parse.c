@@ -12,7 +12,7 @@
 
 #include "../includes/so_long.h"
 
-int	parser(t_data	*game, char	**av)
+int	parser(t_game	*game, char	**av)
 {
 	if (is_ber_file(*av) == FAILURE)
 		return (FAILURE);

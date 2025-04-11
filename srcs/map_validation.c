@@ -13,7 +13,7 @@
 #include "../includes/so_long.h"
 #include <unistd.h>
 
-bool	is_rectangular_map(t_data *game)
+bool	is_rectangular_map(t_game *game)
 {
 	int	i;
 	int	len;
@@ -33,7 +33,7 @@ bool	is_rectangular_map(t_data *game)
 	return (SUCCESS);
 }
 
-bool	check_horizontal_walls(t_data *game)
+bool	check_horizontal_walls(t_game *game)
 {
 	int	i;
 	int	j;
@@ -57,7 +57,7 @@ bool	check_horizontal_walls(t_data *game)
 	return (SUCCESS);
 }
 
-bool	check_vertical_walls(t_data	*game)
+bool	check_vertical_walls(t_game	*game)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ bool	check_vertical_walls(t_data	*game)
 	return (SUCCESS);
 }
 
-bool	check_collectible(t_data *game)
+bool	check_collectible(t_game *game)
 {
 	int	i;
 	int	j;
@@ -96,7 +96,7 @@ bool	check_collectible(t_data *game)
 	return (SUCCESS);
 }
 
-bool	check_start_position(t_data *game)
+bool	check_start_position(t_game *game)
 {
 	int	start_position_count;
 	int	i;
@@ -123,7 +123,7 @@ bool	check_start_position(t_data *game)
 	return (SUCCESS);
 }
 
-bool	check_exit(t_data *game)
+bool	check_exit(t_game *game)
 {
 	int	exit_count;
 	int	i;

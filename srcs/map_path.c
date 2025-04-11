@@ -12,10 +12,16 @@
 
 #include "so_long.h"
 
-bool
-bool	check_path(t_data *game)
+bool	allocate_visited(t_pathfinder *path, t_game *game)
 {
-	t_path_check	path;
+	path->visited = malloc(sizeof(char *) * game->line_count);
+	if (!path->visited)
+		return (FAILURE);
 
-	init_game_path(&path);
+	path->i = 0;
+	while(path->i < game->line_count)
+	{
+		path->visited[path->i] = ft_calloc(sizeof(char), game->len_line);
+	}
+	return (SUCCESS);
 }
