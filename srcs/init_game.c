@@ -25,11 +25,26 @@ void	init_game(t_game *game)
 	game->player_count = 0;
 }
 
-void	init_game_path(t_pathfinder *path)
+bool	init_pathfinder(t_pathfinder *path, t_game *game)
 {
-	path->visited = NULL;
 	path->collectible_found = 0;
 	path->exit_found = 0;
 	path->i = 0;
-	path->j = 0;
+	path->visited = malloc(sizeof(char *) * game->line_count);
+	if (!path->visited)
+		return (FAILURE);
+	while (path->i < game->line_count)
+	{
+		path->visited[path->i] = NULL;
+		path->i++;
+	}
+	path->i = 0;
+	while (path->i < game->line_count)
+	{
+		path->visited[path->i] = calloc(game->len_line, sizeof(char));
+		if (!path->visited[path->i])
+			return (FAILURE);
+		path->i++;
+	}
+	return (SUCCESS);
 }
