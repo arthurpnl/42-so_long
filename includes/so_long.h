@@ -4,6 +4,7 @@
 #include "../Libft/libft.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdbool.h>
 # define SUCCESS 1
 # define FAILURE 0
 
@@ -28,7 +29,6 @@ typedef struct s_pathfinder
     int		collectible_found;
     bool	exit_found;
     int     i;
-    int     j;
 } t_pathfinder;
 
 // file check //
@@ -47,8 +47,15 @@ bool	check_collectible(t_game *game);
 bool	check_exit(t_game *game);
 bool	check_start_position(t_game *game);
 
+// map path //
+void	bt_map(t_pathfinder *path, t_game *game, int x, int y);
+bool	validate_path(t_game *game);
+
 // init game //
 void	init_game(t_game *game);
-void	init_game_path(t_pathfinder *path);
+bool	init_pathfinder(t_pathfinder *path, t_game *game)
+
+// free //
+void	free_pathfinder(t_pathfinder *path, int line_count);
 
 #endif
