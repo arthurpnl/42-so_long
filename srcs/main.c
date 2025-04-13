@@ -16,7 +16,7 @@
 
 int	main(int	argc, char **argv)
 {
-	t_data	*game;
+	t_game	*game;
 	if (argc != 2)
 		return (0);
 	else
