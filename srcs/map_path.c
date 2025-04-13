@@ -12,16 +12,42 @@
 
 #include "so_long.h"
 
-bool	allocate_visited(t_pathfinder *path, t_game *game)
+bool	validate_path(t_game *game)
 {
-	path->visited = malloc(sizeof(char *) * game->line_count);
-	if (!path->visited)
-		return (FAILURE);
+	t_pathfinder    path;
+	bool	result;
 
-	path->i = 0;
-	while(path->i < game->line_count)
+	if (!init_pathfinder(&path, game))
+        return (FAILURE);
+	bt_map(&path, game, game->start_x, game->start_y);
+	if (path.collectible_found == game->collectible_count && path.exit_found == 1)
+		return (free_pathfinder(&path, game->line_count), SUCCESS);
+    else
+        return (free_pathfinder(&path, game->line_count), FAILURE);
+}
+
+void	bt_map(t_pathfinder *path, t_game *game, int x, int y)
+{
+	if (x <= 0 || y <= 0 || game->map[y][x] == '1' || path->visited[y][x] == '1')
+	    return ;
+	if (game->map[y][x] == 'P')
+		path->visited[y][x] = '1';
+	if (game->map[y][x] == '0')
+		path->visited[y][x] = '1';
+	if (game->map[y][x] == 'C')
 	{
-		path->visited[path->i] = ft_calloc(sizeof(char), game->len_line);
+		path->collectible_found++;
+        path->visited[y][x] = '1';
 	}
-	return (SUCCESS);
+	if (game->map[y][x] == 'E')
+    {
+        path->exit_found = 1;
+        path->visited[y][x] = '1';
+        return;
+    }
+
+    bt_map(path, game, x, y - 1);  // haut
+    bt_map(path, game, x, y + 1);  // bas
+    bt_map(path, game, x - 1, y);  // gauche
+    bt_map(path, game, x + 1, y);  // droite
 }
