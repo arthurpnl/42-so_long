@@ -12,7 +12,7 @@
 
 #include "../includes/so_long.h"
 
-int	parser(t_game	*game, char	**av)
+int	parser_map(t_game	*game, char	**av)
 {
 	if (is_ber_file(*av) == FAILURE)
 		return (FAILURE);
@@ -33,4 +33,11 @@ int	parser(t_game	*game, char	**av)
     if (check_start_position(game) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
+}
+
+int    parser_mlx(t_game *game)
+{
+    if (init_mlx(game) == FAILURE)
+        return (FAILURE);
+    return (SUCCESS);
 }
