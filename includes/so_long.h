@@ -1,7 +1,9 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include "../Libft/libft.h"
+#include "../Libft/includes/libft.h"
+#include "../Libft/includes/ft_printf.h"
+#include "../Libft/includes/get_next_line.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -53,7 +55,10 @@ bool	validate_path(t_game *game);
 
 // init game //
 void	init_game(t_game *game);
-bool	init_pathfinder(t_pathfinder *path, t_game *game)
+bool	init_pathfinder(t_pathfinder *path, t_game *game);
+
+// parse //
+int	parser(t_game	*game, char	**av);
 
 // free //
 void	free_pathfinder(t_pathfinder *path, int line_count);

@@ -31,6 +31,6 @@ int	parser(t_game	*game, char	**av)
     if (check_exit(game) == FAILURE)
         return (FAILURE);
     if (check_start_position(game) == FAILURE)
-        return (FAILURE);
+		return (FAILURE);
 	return (SUCCESS);
 }

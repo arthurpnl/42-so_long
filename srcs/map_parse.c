@@ -25,6 +25,8 @@ bool	count_line(char *file, t_game *game)
 		return (FAILURE);
 	}
 	buf = get_next_line(fd);
+	if (!buf)
+		return(ft_printf("Empy file.\n"), FAILURE);
 	while (buf)
 	{
 		game->line_count++;
@@ -35,11 +37,11 @@ bool	count_line(char *file, t_game *game)
 	return (SUCCESS);
 }
 
-bool    parse_map(char *file, t_game *game)
+bool	parse_map(char *file, t_game *game)
 {
-	int        fd;
-	int        i;
-	char    *line;
+	int		fd;
+	int		i;
+	char	*line;
 
 	i = 0;
 	fd = open(file, O_RDONLY);
@@ -54,7 +56,10 @@ bool    parse_map(char *file, t_game *game)
 		if (line == NULL)
 			return (close(fd), FAILURE);
 		game->map[i++] = line;
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
 	}
 	game->map[i] = NULL;
 	return (close(fd), SUCCESS);
 }
+
