@@ -30,7 +30,6 @@ void	free_game(t_game *game)
 {
 	int	i;
 
-	/* Libère la carte (game->map) */
 	if (game->map)
 	{
 		i = 0;
@@ -44,7 +43,6 @@ void	free_game(t_game *game)
 		game->map = NULL;
 	}
 
-	/* Libère les sprites MiniLibX */
 	if (game->sprite_player)
 		mlx_destroy_image(game->mlx, game->sprite_player);
 	if (game->sprite_wall)
@@ -56,7 +54,6 @@ void	free_game(t_game *game)
 	if (game->sprite_exit)
 		mlx_destroy_image(game->mlx, game->sprite_exit);
 
-	/* Ferme la fenêtre MiniLibX */
 	if (game->window)
 		mlx_destroy_window(game->mlx, game->window);
 }
