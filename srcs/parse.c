@@ -39,5 +39,9 @@ int    parser_mlx(t_game *game)
 {
     if (init_mlx(game) == FAILURE)
         return (FAILURE);
+    if (create_window(game) == FAILURE)
+    	return (FAILURE);
+    if (init_sprite(game))
+		return (FAILURE);
     return (SUCCESS);
 }

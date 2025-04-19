@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include <unistd.h>
 
 bool	is_rectangular_map(t_game *game)
 {
@@ -42,17 +41,15 @@ bool	check_horizontal_walls(t_game *game)
 	j = 0;
 	while (i < game->len_line)
 	{
-		if (game->map[0][i] == '1')
-			i++;
-		else
+		if (game->map[0][i] != '1')
 			return (ft_printf("Error\nInvalid Map\n"), FAILURE);
+		i++;
 	}
 	while (j < game->len_line)
 	{
-		if (game->map[game->line_count - 1][j] == '1')
-			j++;
-		else
+		if (game->map[game->line_count - 1][j] != '1')
 			return (ft_printf("Error\nInvalid Map\n"), FAILURE);
+		j++;
 	}
 	return (SUCCESS);
 }

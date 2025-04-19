@@ -42,6 +42,7 @@ bool	parse_map(char *file, t_game *game)
 	int		fd;
 	int		i;
 	char	*line;
+	//size_t len;
 
 	i = 0;
 	fd = open(file, O_RDONLY);
@@ -55,9 +56,10 @@ bool	parse_map(char *file, t_game *game)
 		line = get_next_line(fd);
 		if (line == NULL)
 			return (close(fd), FAILURE);
+		/*len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+            line[len - 1] = '\0';*/
 		game->map[i++] = line;
-		if (line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
 	}
 	game->map[i] = NULL;
 	return (close(fd), SUCCESS);
