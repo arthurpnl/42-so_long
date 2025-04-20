@@ -24,7 +24,7 @@ bool	is_rectangular_map(t_game *game)
 		len = ft_strlen(game->map[i]);
 		if (len != game->len_line)
 		{
-			ft_printf("Error\nUnvalid Map\n");
+			ft_printf("Error\nInvalid Map\n");
 			return (FAILURE);
 		}
 		i++;
@@ -129,16 +129,19 @@ bool	check_exit(t_game *game)
 	i = 0;
 	j = 0;
 	exit_count = 0;
-	while (++j < game->line_count - 1)
+	while (j < game->line_count)
 	{
-		while (++i < game->len_line - 1)
+		i = 0;
+		while (i < game->len_line)
 		{
 			if (game->map[j][i] == 'E')
 				exit_count++;
+			i++;
 		}
-		i = 1;
+		j++;
 	}
 	if (exit_count != 1)
 		return (ft_printf("Error\nInvalid Map\n"), FAILURE);
+	game->exit_count = exit_count;
 	return (SUCCESS);
 }
