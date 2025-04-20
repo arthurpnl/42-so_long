@@ -23,8 +23,9 @@ bool	render_map(t_game *game)
 		x = 0;
 		while (game->map[y][x])
 		{
-			mlx_put_image_to_window(game->mlx, game->window, game->sprite_ground, x * 32, y * 32);
-			if (game->map[y][x] == '1')
+			if (game->map[y][x] == '0')
+				mlx_put_image_to_window(game->mlx, game->window, game->sprite_ground, x * 32, y * 32);
+			else if (game->map[y][x] == '1')
 				mlx_put_image_to_window(game->mlx, game->window, game->sprite_wall, x * 32, y * 32);
 			else if(game->map[y][x] == 'P')
 				mlx_put_image_to_window(game->mlx, game->window, game->sprite_player, x * 32, y * 32);
@@ -40,3 +41,4 @@ bool	render_map(t_game *game)
 	}
 	return (SUCCESS);
 }
+
