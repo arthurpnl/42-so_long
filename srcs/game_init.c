@@ -23,10 +23,13 @@ void	init_game(t_game *game)
 	game->exit_count = 0;
 	game->collectible_count = 0;
 	game->player_count = 0;
+	game->mlx = NULL;
+	game->window = NULL;
 }
 
-bool	init_pathfinder(t_pathfinder *path, t_game *game)
+bool	init_pathfinder(t_game *game, t_pathfinder *path)
 {
+	path->visited = NULL;
 	path->collectible_found = 0;
 	path->exit_found = 0;
 	path->i = 0;
@@ -43,7 +46,7 @@ bool	init_pathfinder(t_pathfinder *path, t_game *game)
 	{
 		path->visited[path->i] = calloc(game->len_line, sizeof(char));
 		if (!path->visited[path->i])
-			return (FAILURE);
+			return (free_pathfinder(path, path->i), FAILURE);
 		path->i++;
 	}
 	return (SUCCESS);
