@@ -12,23 +12,21 @@
 
 #include "../includes/so_long.h"
 
-bool	validate_path(t_game *game)
+bool	validate_path(t_game *game, t_pathfinder *path)
 {
-	t_pathfinder    path;
-
-	if (!init_pathfinder(&path, game))
-        return (FAILURE);
-	bt_map(&path, game, game->start_x, game->start_y);
-	if (path.collectible_found == game->collectible_count && path.exit_found == 1)
-		return (free_pathfinder(&path, game->line_count), SUCCESS);
+	bt_map(path, game, game->start_x, game->start_y);
+	if (path->collectible_found == game->collectible_count && path->exit_found == 1)
+		return (free_pathfinder(path, game->line_count), SUCCESS);
     else
-        return (free_pathfinder(&path, game->line_count), FAILURE);
+        return (ft_printf("Error : Collectible/Exit not reachable"), free_pathfinder(path, game->line_count), FAILURE);
 }
 
 void	bt_map(t_pathfinder *path, t_game *game, int x, int y)
 {
-	if (x <= 0 || y <= 0 || game->map[y][x] == '1' || path->visited[y][x] == '1')
+	if (x <= 0 || y <= 0 || x >= game->len_line || y >= game->line_count)
 	    return ;
+	if (game->map[y][x] == '1' || path->visited[y][x] == '1')
+		return ;
 	if (game->map[y][x] == 'P')
 		path->visited[y][x] = '1';
 	if (game->map[y][x] == '0')
