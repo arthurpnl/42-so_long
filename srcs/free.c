@@ -34,7 +34,6 @@ void free_pathfinder(t_pathfinder *path, int line_count)
     path->visited = NULL;
 }
 
-
 void	free_game(t_game *game)
 {
 	int	i;
@@ -51,4 +50,31 @@ void	free_game(t_game *game)
 		free(game->map);
 		game->map = NULL;
 	}
+}
+
+int	destroy_free_mlx(t_game *game)
+{
+	if (game)
+	{
+		if (game->window)
+			mlx_destroy_window(game->mlx, game->window);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	if (game->sprite_player)
+		mlx_destroy_image(game->mlx, game->sprite_player);
+	if (game->sprite_wall)
+		mlx_destroy_image(game->mlx, game->sprite_wall);
+	if (game->sprite_ground)
+		mlx_destroy_image(game->mlx, game->sprite_ground);
+	if (game->sprite_collectible)
+		mlx_destroy_image(game->mlx, game->sprite_collectible);
+	if (game->sprite_exit)
+		mlx_destroy_image(game->mlx, game->sprite_exit);
+	if (game->map)
+	{
+		free_game(game);
+		game->map = NULL;
+	}
+	exit(0);
 }

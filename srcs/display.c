@@ -42,3 +42,5 @@ bool	render_map(t_game *game)
 	return (SUCCESS);
 }
 
+
+

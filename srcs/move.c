@@ -1,0 +1,117 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 17:19:05 by arpenel           #+#    #+#             */
+/*   Updated: 2025/04/21 17:19:08 by arpenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/so_long.h"
+
+int	move_up(t_game *game)
+{
+	if (game->map[game->player_y - 1][game->player_x] != '1')
+	{
+		if (game->map[game->player_y - 1][game->player_x] == 'C')
+		{
+			game->collectible_found++;
+			game->map[game->player_y - 1][game->player_x] = '0';
+		}
+		game->map[game->player_y][game->player_x] = '0';
+		game->player_y--; // Déplace le joueur
+		game->map[game->player_y][game->player_x] = 'P';
+		render_map(game);
+		check_exit_condition(game);
+
+		return (SUCCESS);
+	}
+	return (FAILURE);
+}
+
+int	move_down(t_game *game)
+{
+	if (game->map[game->player_y + 1][game->player_x] != '1')
+	{
+		if (game->map[game->player_y + 1][game->player_x] == 'C')
+		{
+			game->collectible_found++;
+			game->map[game->player_y + 1][game->player_x] = '0';
+		}
+		game->map[game->player_y][game->player_x] = '0';
+		game->player_y++;
+		game->map[game->player_y][game->player_x] = 'P';
+		render_map(game);
+		check_exit_condition(game);
+
+		return (SUCCESS);
+	}
+	return (FAILURE);
+}
+/*
+int move_left(t_game *game)
+{
+	if (game->map[game->player_y][game->player_x - 1] != '1')
+	{
+		if (game->map[game->player_y][game->player_x - 1] == 'C')
+		{
+			game->collectible_found++;
+			game->map[game->player_y][game->player_x - 1] = '0'; // Collectible collecté
+		}
+		game->map[game->player_y][game->player_x] = '0';
+		game->player_x--;
+		game->map[game->player_y][game->player_x] = 'P';
+		render_map(game);
+		check_exit_condition(game);
+
+		return (SUCCESS);
+	}
+	return (FAILURE);
+}*/
+int	move_left(t_game *game)
+{
+	if (game->map[game->player_y][game->player_x - 1] != '1')
+	{
+		if (game->map[game->player_y][game->player_x - 1] == 'C')
+		{
+			game->collectible_found++;
+			game->map[game->player_y][game->player_x - 1] = '0';
+		}
+
+		if (game->map[game->player_y][game->player_x] != 'E')
+			game->map[game->player_y][game->player_x] = '0';
+
+		game->player_x--;
+
+		if (game->map[game->player_y][game->player_x] != 'E')
+			game->map[game->player_y][game->player_x] = 'P';
+
+		render_map(game);
+		check_exit_condition(game);
+
+		return (SUCCESS);
+	}
+	return (FAILURE);
+}
+
+int	move_right(t_game *game)
+{
+	if (game->map[game->player_y][game->player_x + 1] != '1')
+	{
+		if (game->map[game->player_y][game->player_x + 1] == 'C')
+		{
+			game->collectible_found++;
+			game->map[game->player_y][game->player_x + 1] = '0';
+		}
+		game->map[game->player_y][game->player_x] = '0';
+		game->player_x++;
+		game->map[game->player_y][game->player_x] = 'P';
+		render_map(game);
+		check_exit_condition(game);
+		return (SUCCESS);
+	}
+	return (FAILURE);
+}

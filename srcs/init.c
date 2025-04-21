@@ -22,7 +22,9 @@ void	init_game(t_game *game)
 	game->player_y = 0;
 	game->exit_count = 0;
 	game->collectible_count = 0;
+	game->collectible_found = 0;
 	game->player_count = 0;
+	game->move = 0;
 	game->mlx = NULL;
 	game->window = NULL;
 }

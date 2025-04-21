@@ -1,15 +1,18 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include "../Libft/includes/libft.h"
-#include "../Libft/includes/ft_printf.h"
-#include "../Libft/includes/get_next_line.h"
-#include "../mlx/mlx.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
-# define SUCCESS 1
+# include "../Libft/includes/libft.h"
+# include "../Libft/includes/ft_printf.h"
+# include "../Libft/includes/get_next_line.h"
+# include "../mlx/mlx.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+
 # define FAILURE 0
+# define SUCCESS 1
 
 typedef struct s_game
 {
@@ -25,7 +28,9 @@ typedef struct s_game
     int     player_y;
     int     exit_count;
     int     collectible_count;
+    int     collectible_found;
     int     player_count;
+    int		move;
     // MiniLibx
     void    *mlx;
     void	*window;
@@ -46,9 +51,13 @@ typedef struct s_pathfinder
     int     i;
 } t_pathfinder;
 
-// file check //
+// check file //
 bool	is_ber_file(char	*file);
 bool	is_regular_file(char *file);
+
+// init //
+void	init_game(t_game *game);
+bool	init_pathfinder(t_game *game, t_pathfinder *path);
 
 // map parse //
 bool	count_line(char *file, t_game *game);
@@ -62,33 +71,47 @@ bool    parse_map(char *file, t_game *game);
 bool	is_rectangular_map(t_game *game);
 bool	check_horizontal_walls(t_game *game);
 bool	check_vertical_walls(t_game	*game);
+bool	check_valid_char(t_game *game);
+
+// map check2 //
 bool	check_collectible(t_game *game);
-bool	check_exit(t_game *game);
 bool	check_start_position(t_game *game);
+bool	check_exit(t_game *game);
 
 // map path //
 void	bt_map(t_pathfinder *path, t_game *game, int x, int y);
 bool	validate_path(t_game *game, t_pathfinder *path);
 
-// game init //
-void	init_game(t_game *game);
-bool	init_pathfinder(t_game *game, t_pathfinder *path);
-
 // parse //
 int		parser_map(t_game	*game, char	**av);
 int		parser_mlx(t_game *game);
 
-// memory cleaner //
+// free //
 void	free_pathfinder(t_pathfinder *path, int line_count);
 void	free_game(t_game *game);
+int	destroy_free_mlx(t_game *game);
 
 // mlx setup //
 bool	init_mlx(t_game *game);
 bool    create_window(t_game *game);
 bool	init_sprite(t_game *game);
 
-// render map //
+// display //
 bool	render_map(t_game *game);
+
+// hooks //
+int	select_move(int keycode, t_game *game, int move);
+int	key_press_hook(int keycode, t_game *game);
+
+// move //
+int	move_up(t_game *game);
+int	move_down(t_game *game);
+int move_left(t_game *game);
+int	move_right(t_game *game);
+
+// game end //
+int	close_window(t_game *game);
+void	check_exit_condition(t_game *game);
 
 
 #endif

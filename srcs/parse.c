@@ -15,39 +15,43 @@
 int	parser_map(t_game	*game, char	**av)
 {
 	t_pathfinder	path;
+
 	if (is_ber_file(*av) == FAILURE)
 		return (FAILURE);
 	if (count_line(*av, game) == FAILURE)
-        return (FAILURE);
+		return (FAILURE);
 	if (parse_map(*av, game) == FAILURE)
 		return (FAILURE);
 	if (is_rectangular_map(game) == FAILURE)
-        return (FAILURE);
-    if (check_horizontal_walls(game) == FAILURE)
-       	return (FAILURE);
-    if (check_vertical_walls(game) == FAILURE)
-    	return (FAILURE);
-    if (check_collectible(game) == FAILURE)
-        return (FAILURE);
-    if (check_exit(game) == FAILURE)
-        return (FAILURE);
-    if (check_start_position(game) == FAILURE)
 		return (FAILURE);
+	if (check_valid_char(game) == FAILURE)
+		return (FAILURE);
+	if (check_horizontal_walls(game) == FAILURE)
+		return (FAILURE);
+	if (check_vertical_walls(game) == FAILURE)
+		return (FAILURE);
+	if (check_collectible(game) == FAILURE)
+		return (FAILURE);
+	if (check_exit(game) == FAILURE)
+		return (FAILURE);
+	if (check_start_position(game) == FAILURE)
+		return (FAILURE);
+	game->player_y = game->start_y;
+	game->player_x = game->start_x;
 	if (init_pathfinder(game, &path) == FAILURE)
-        return (FAILURE);
+		return (FAILURE);
 	if (validate_path(game, &path) == FAILURE)
-        return (FAILURE);
+		return (FAILURE);
 	return (SUCCESS);
 }
 
-int    parser_mlx(t_game *game)
+int	parser_mlx(t_game *game)
 {
-    if (init_mlx(game) == FAILURE)
-        return (FAILURE);
-    if (create_window(game) == FAILURE)
-    	return (FAILURE);
-    if (init_sprite(game) == FAILURE)
+	if (init_mlx(game) == FAILURE)
 		return (FAILURE);
-    return (SUCCESS);
+	if (create_window(game) == FAILURE)
+		return (FAILURE);
+	if (init_sprite(game) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
 }
-

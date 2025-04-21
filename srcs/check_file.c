@@ -42,22 +42,16 @@ bool	is_ber_file(char	*file)
 
 bool	is_regular_file(char *file)
 {
-	int	fd;
+	int		fd;
 	char	buffer[1];
-	int read_result;
+	int		read_result;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-	{
-	    ft_printf("File does not exists or cannot be open\n");
-        return (FAILURE);
-	}
+		return (ft_printf("File does not exists or cannot be open\n"), FAILURE);
 	read_result = read(fd, buffer, 1);
 	close(fd);
 	if (read_result < 0)
-	{
-        ft_printf("Not a regular file\n");
-        return (FAILURE);
-	}
+		return (ft_printf("Not a regular file\n"), FAILURE);
 	return (SUCCESS);
 }
