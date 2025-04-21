@@ -14,7 +14,8 @@
 
 int close_window(t_game *game)
 {
-	ft_printf("[DEBUG] Fermeture propre de la fenêtre demandée par l'utilisateur.\n");
+	if(!game)
+		return (0);
 	free_game(game);
 	exit(EXIT_SUCCESS);
 	return (0);

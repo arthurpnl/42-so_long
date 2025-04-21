@@ -1,53 +1,47 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 15:41:14 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/07 15:41:14 by arpenel          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../includes/so_long.h"
 
 #include "../includes/so_long.h"
+
+int	close_game(t_game *game)
+{
+	ft_printf("Closing game...\n");
+	destroy_free_mlx(game);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (argc != 2) // Vérification des arguments
+	// Vérification du nombre d'arguments
+	if (argc != 2)
 	{
-		ft_printf("Usage: ./so_long <filename.ber>\n");
-		return (1);
+		ft_printf("Usage: ./so_long <map.ber>\n");
+		return (EXIT_FAILURE);
 	}
 
-	init_game(&game); // Initialisation des éléments du jeu
+	// Initialisation des structures de jeu
+	init_game(&game);
 
-	// Lancer le parsing complet via la fonction centralisée
-	if (parser(&game, &argv[1]) == FAILURE)
-	{
-		ft_printf("Failed to parse map. Exiting...\n");
-		return (1);
-	}
+	// Parsing et validation de la carte
+	if (parser_map(&game, &argv[1]) == FAILURE)
+		return (free_game(&game), EXIT_FAILURE);
 
-	// Vérifier la validité des chemins pour collecter les éléments et atteindre la sortie
-	if (validate_path(&game) == FAILURE)
-	{
-		ft_printf("Map path validation failed. Exiting...\n");
-		return (1);
-	}
+	// Initialisation graphique avec MiniLibX
+	if (parser_mlx(&game) == FAILURE)
+		return (free_game(&game), EXIT_FAILURE);
 
-	// Si tout est validé, afficher un message de succès
-	ft_printf("Map successfully parsed and validated!\n");
+	// Rendu initial de la carte sur l'écran
+	if (render_map(&game) == FAILURE)
+		return (free_game(&game), EXIT_FAILURE);
 
-	// Libérer les ressources de la carte s'il y a lieu
-	if (game.map)
-	{
-		for (int i = 0; i < game.line_count; i++)
-			free(game.map[i]);
-		free(game.map);
-	}
+	// Mise en place des hooks pour le clavier et la fermeture de la fenêtre
+	mlx_hook(game.window, 17, 0, close_game, &game);                   // Fermeture de la fenêtre (croix rouge)
+	mlx_hook(game.window, 2, 1L << 0, key_press_hook, &game);          // Gestion des touches pressées (mouvements)
 
-	return (0);
+	// Boucle principale de MiniLibX (rendu graphique)
+	mlx_loop(game.mlx);
+
+	// Tout s'est bien passé !
+	return (EXIT_SUCCESS);
 }

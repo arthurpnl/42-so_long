@@ -27,7 +27,7 @@ int	select_move(int keycode, t_game *game, int move)
 
 int	key_press_hook(int keycode, t_game *game)
 {
-	if (keycode == XK_Escape)
+	if (keycode == 53)
 		destroy_free_mlx(game);
 	game->move = select_move(keycode, game, game->move);
 	return (0);

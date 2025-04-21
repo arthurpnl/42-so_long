@@ -54,13 +54,6 @@ void	free_game(t_game *game)
 
 int	destroy_free_mlx(t_game *game)
 {
-	if (game)
-	{
-		if (game->window)
-			mlx_destroy_window(game->mlx, game->window);
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-	}
 	if (game->sprite_player)
 		mlx_destroy_image(game->mlx, game->sprite_player);
 	if (game->sprite_wall)
@@ -71,6 +64,13 @@ int	destroy_free_mlx(t_game *game)
 		mlx_destroy_image(game->mlx, game->sprite_collectible);
 	if (game->sprite_exit)
 		mlx_destroy_image(game->mlx, game->sprite_exit);
+	if (game)
+	{
+		if (game->window)
+			mlx_destroy_window(game->mlx, game->window);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 	if (game->map)
 	{
 		free_game(game);
