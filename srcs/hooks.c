@@ -12,23 +12,26 @@
 
 #include "../includes/so_long.h"
 
-int	select_move(int keycode, t_game *game, int move)
+void	select_move(int keycode, t_game *game)
 {
 	if (keycode == 119)
-		move = move_up(game);
+		move_up(game);
 	else if (keycode == 115)
-		move = move_down(game);
+		move_down(game);
 	else if (keycode == 97)
-		move = move_left(game);
+		move_left(game);
 	else if (keycode == 100)
-		move = move_right(game);
-	return (move);
+		move_right(game);
 }
 
 int	key_press_hook(int keycode, t_game *game)
 {
-	if (keycode == 53)
+	if (keycode == XK_Escape)
+	{
+		ft_printf("ESC pressed.\n");
 		destroy_free_mlx(game);
-	game->move = select_move(keycode, game, game->move);
+	}
+	select_move(keycode, game);
+	ft_printf("Move : %i\n", game->move);
 	return (0);
 }

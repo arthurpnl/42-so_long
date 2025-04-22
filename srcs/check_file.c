@@ -25,14 +25,14 @@ bool	is_ber_file(char	*file)
 		len = ft_strlen(file);
 		if (len <= 4)
 		{
-			ft_printf("Unvalid file\n");
+			ft_printf("Error\nUnvalid file\n");
 			return (FAILURE);
 		}
 		if (ft_strncmp(file + len - 4, ".ber", 4) == 0)
 			return (SUCCESS);
 		else
 		{
-			ft_printf("Incorrect extension file\n");
+			ft_printf("Error\nIncorrect extension file\n");
 			return (FAILURE);
 		}
 	}
@@ -48,10 +48,10 @@ bool	is_regular_file(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (ft_printf("File does not exists or cannot be open\n"), FAILURE);
+		return (ft_printf("Errror\nFile cannot be open\n"), FAILURE);
 	read_result = read(fd, buffer, 1);
 	close(fd);
 	if (read_result < 0)
-		return (ft_printf("Not a regular file\n"), FAILURE);
+		return (ft_printf("Error\nNot a regular file\n"), FAILURE);
 	return (SUCCESS);
 }

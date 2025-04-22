@@ -11,29 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-/*
-bool	check_collectible(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	j = 1;
-	while (j < game->line_count - 1)
-	{
-		while (i < game->len_line - 1)
-		{
-			if (game->map[j][i] == 'C')
-				game->collectible_count++;
-			i++;
-		}
-		j++;
-		i = 1;
-	}
-	if (game->collectible_count < 1)
-		return (ft_printf("Error\nInvalid Map\n"), FAILURE);
-	return (SUCCESS);
-}*/
 
 bool	check_collectible(t_game *game)
 {
@@ -47,18 +24,14 @@ bool	check_collectible(t_game *game)
 		while (i < game->len_line - 1)
 		{
 			if (game->map[j][i] == 'C')
-			{
-				game->collectible_count++;
-				ft_printf("[DEBUG] Collectible trouvé à (%d, %d)\n", j, i); // Ajout debug
-			}
+				game->collect_count++;
 			i++;
 		}
 		j++;
 		i = 1;
 	}
-	if (game->collectible_count < 1)
+	if (game->collect_count < 1)
 		return (ft_printf("Error\nInvalid Map\n"), FAILURE);
-	ft_printf("[DEBUG] Nombre total de collectibles : %d\n", game->collectible_count);
 	return (SUCCESS);
 }
 

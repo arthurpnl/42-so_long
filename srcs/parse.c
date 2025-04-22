@@ -12,10 +12,27 @@
 
 #include "../includes/so_long.h"
 
-int	parser_map(t_game	*game, char	**av)
+static int	parser_map2(t_game *game)
 {
 	t_pathfinder	path;
 
+	if (check_vertical_walls(game) == FAILURE)
+		return (FAILURE);
+	if (check_collectible(game) == FAILURE)
+		return (FAILURE);
+	if (check_exit(game) == FAILURE)
+		return (FAILURE);
+	if (check_start_position(game) == FAILURE)
+		return (FAILURE);
+	if (init_pathfinder(game, &path) == FAILURE)
+		return (FAILURE);
+	if (validate_path(game, &path) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	parser_map(t_game	*game, char	**av)
+{
 	if (is_ber_file(*av) == FAILURE)
 		return (FAILURE);
 	if (count_line(*av, game) == FAILURE)
@@ -28,19 +45,7 @@ int	parser_map(t_game	*game, char	**av)
 		return (FAILURE);
 	if (check_horizontal_walls(game) == FAILURE)
 		return (FAILURE);
-	if (check_vertical_walls(game) == FAILURE)
-		return (FAILURE);
-	if (check_collectible(game) == FAILURE)
-		return (FAILURE);
-	if (check_exit(game) == FAILURE)
-		return (FAILURE);
-	if (check_start_position(game) == FAILURE)
-		return (FAILURE);
-	game->player_y = game->start_y;
-	game->player_x = game->start_x;
-	if (init_pathfinder(game, &path) == FAILURE)
-		return (FAILURE);
-	if (validate_path(game, &path) == FAILURE)
+	if (parser_map2(game) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arpenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 13:56:18 by arpenel           #+#    #+#             */
+/*   Updated: 2025/04/22 13:56:26 by arpenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -13,6 +25,10 @@
 
 # define FAILURE 0
 # define SUCCESS 1
+# define WRONG_CHAR_TYPE "Error\nInvalid caracter found on the map.\n"
+# define ERR_PATH "Error\nCollectble/Exit not reachable\n"
+# define ERR_LOAD_SPRITE "Error\nFailed to charge sprites.\n"
+
 
 typedef struct s_game
 {
@@ -27,26 +43,26 @@ typedef struct s_game
     int     player_x;
     int     player_y;
     int     exit_count;
-    int     collectible_count;
-    int     collectible_found;
+    int     collect_count;
+    int     collect_found;
     int     player_count;
     int		move;
     // MiniLibx
     void    *mlx;
     void	*window;
 	// Sprites //
-	void	*sprite_player;
-	void	*sprite_wall;
-	void	*sprite_ground;
-	void	*sprite_collectible;
-	void	*sprite_exit;
+	void	*player;
+	void	*wall;
+	void	*ground;
+	void	*collect;
+	void	*exit;
 
 } t_game;
 
 typedef struct s_pathfinder
 {
     char    **visited;
-    int		collectible_found;
+    int		collect_found;
     bool	exit_found;
     int     i;
 } t_pathfinder;
@@ -100,7 +116,7 @@ bool	init_sprite(t_game *game);
 bool	render_map(t_game *game);
 
 // hooks //
-int	select_move(int keycode, t_game *game, int move);
+void	select_move(int keycode, t_game *game);
 int	key_press_hook(int keycode, t_game *game);
 
 // move //
@@ -112,6 +128,5 @@ int	move_right(t_game *game);
 // game end //
 int	close_window(t_game *game);
 void	check_exit_condition(t_game *game);
-
 
 #endif

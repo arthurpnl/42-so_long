@@ -26,10 +26,10 @@ bool	count_line(char *file, t_game *game)
 	}
 	buf = get_next_line(fd);
 	if (!buf)
-		return(ft_printf("Empy file.\n"), FAILURE);
+		return (ft_printf("Error\nEmpy file.\n"), FAILURE);
 	while (buf)
 	{
-		if(buf[0] != '\n' && buf[0] != '\0')
+		if (buf[0] != '\n' && buf[0] != '\0')
 			game->line_count++;
 		free(buf);
 		buf = get_next_line(fd);
@@ -42,7 +42,7 @@ bool	allocate_map_array(t_game *game)
 {
 	game->map = malloc(sizeof(char *) * (game->line_count + 1));
 	if (!game->map)
-		return (ft_printf("Error : Allocation mémoire échouée pour la carte\n"), FAILURE);
+		return (ft_printf("Error\nFailed to allocate map.\n"), FAILURE);
 	return (SUCCESS);
 }
 
@@ -51,12 +51,10 @@ char	*clean_line(char *line)
 	size_t	len;
 
 	len = ft_strlen(line);
-
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
 	if (len > 1 && line[len - 2] == '\r')
 		line[len - 2] = '\0';
-
 	return (line);
 }
 
@@ -70,11 +68,9 @@ bool	read_and_clean_map(int fd, t_game *game)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return (ft_printf("Error : Lecture échouée à la ligne %d\n", i), FAILURE);
-
+			return (ft_printf("Error\nFailed to read lign%d.\n", i), FAILURE);
 		game->map[i++] = clean_line(line);
 	}
-
 	game->map[i] = NULL;
 	return (SUCCESS);
 }
@@ -85,16 +81,11 @@ bool	parse_map(char *file, t_game *game)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (ft_printf("Error : Impossible d'ouvrir le fichier\n"), FAILURE);
-
+		return (ft_printf("Error\nCan not open the file\n"), FAILURE);
 	if (allocate_map_array(game) == FAILURE)
 		return (close(fd), FAILURE);
-
 	if (read_and_clean_map(fd, game) == FAILURE)
 		return (close(fd), FAILURE);
-
 	close(fd);
 	return (SUCCESS);
 }
-
-

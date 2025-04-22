@@ -21,8 +21,8 @@ void	init_game(t_game *game)
 	game->player_x = 0;
 	game->player_y = 0;
 	game->exit_count = 0;
-	game->collectible_count = 0;
-	game->collectible_found = 0;
+	game->collect_count = 0;
+	game->collect_found = 0;
 	game->player_count = 0;
 	game->move = 0;
 	game->mlx = NULL;
@@ -32,7 +32,7 @@ void	init_game(t_game *game)
 bool	init_pathfinder(t_game *game, t_pathfinder *path)
 {
 	path->visited = NULL;
-	path->collectible_found = 0;
+	path->collect_found = 0;
 	path->exit_found = 0;
 	path->i = 0;
 	path->visited = malloc(sizeof(char *) * game->line_count);

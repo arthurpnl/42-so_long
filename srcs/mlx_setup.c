@@ -16,45 +16,46 @@ bool	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-	    return (printf("Error : Failed to initialize MiniLibx"), FAILURE);
+		return (printf("Error : Failed to initialize MiniLibx"), FAILURE);
 	return (SUCCESS);
 }
 
-bool    create_window(t_game *game)
+bool	create_window(t_game *game)
 {
-    int    window_width;
-    int    window_height;
+	int	w_width;
+	int	w_height;
 
-	window_width = game->len_line * 32;
-	window_height = game->line_count * 32;
-    game->window = mlx_new_window(game->mlx, window_width, window_height, "so_long");
+	w_width = game->len_line * 32;
+	w_height = game->line_count * 32;
+	game->window = mlx_new_window(game->mlx, w_width, w_height, "so_long");
 	if (!game->window)
-		return(ft_printf("Error : Failed to create window"), FAILURE);
+		return (ft_printf("Error : Failed to create window"), FAILURE);
 	return (SUCCESS);
 }
 
 bool	init_sprite(t_game *game)
 {
-	int width;
-	int	height;
+	int	w;
+	int	h;
 
-	width = 64;
-	height = 64;
-	game->sprite_player = mlx_xpm_file_to_image(game->mlx, "textures/player.xpm", &width, &height);
-	game->sprite_wall = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm", &width, &height);
-	game->sprite_ground = mlx_xpm_file_to_image(game->mlx, "textures/ground.xpm", &width, &height);
-	game->sprite_collectible = mlx_xpm_file_to_image(game->mlx, "textures/collectible.xpm", &width, &height);
-	game->sprite_exit = mlx_xpm_file_to_image(game->mlx, "textures/exit.xpm", &width, &height);
-	if (!game->sprite_player)
-		return (ft_printf("Error : Failed to charge player image.\n"), FAILURE);
-	else if (!game->sprite_wall)
-		return (ft_printf("Error : Failed to charge wall image.\n"), FAILURE);
-	else if (!game->sprite_ground)
-		return (ft_printf("Error : Failed to charge ground image\n"), FAILURE);
-	else if (!game->sprite_collectible)
-		return (ft_printf("Error : Failed to charge collectible image\n"), FAILURE);
-	else if (!game->sprite_exit)
-		return (ft_printf("Errror : Failed to charge exit image\n"), FAILURE);
+	w = 64;
+	h = 64;
+	game->player = mlx_xpm_file_to_image(game->mlx, "xpm/player.xpm", &w, &h);
+	game->wall = mlx_xpm_file_to_image(game->mlx, "xpm/wall.xpm", &w, &h);
+	game->ground = mlx_xpm_file_to_image(game->mlx, "xpm/ground.xpm", &w, &h);
+	game->collect = mlx_xpm_file_to_image(game->mlx, "xpm/collectible.xpm" \
+		, &w, &h);
+	game->exit = mlx_xpm_file_to_image(game->mlx, "xpm/exit.xpm", &w, &h);
+	if (!game->player)
+		return (ft_printf(ERR_LOAD_SPRITE), FAILURE);
+	else if (!game->wall)
+		return (ft_printf(ERR_LOAD_SPRITE), FAILURE);
+	else if (!game->ground)
+		return (ft_printf(ERR_LOAD_SPRITE), FAILURE);
+	else if (!game->collect)
+		return (ft_printf(ERR_LOAD_SPRITE), FAILURE);
+	else if (!game->exit)
+		return (ft_printf(ERR_LOAD_SPRITE), FAILURE);
 	else
 		return (SUCCESS);
 }

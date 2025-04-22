@@ -47,7 +47,7 @@ bool	check_valid_char(t_game *game)
 				&& game->map[j][i] != 'C' && game->map[j][i] != 'E'
 				&& game->map[j][i] != 'P')
 			{
-				ft_printf("Error : Invalid character found.\n");
+				ft_printf("Error\nInvalid character found.\n");
 				return (FAILURE);
 			}
 			i++;
@@ -95,4 +95,3 @@ bool	check_vertical_walls(t_game	*game)
 	}
 	return (SUCCESS);
 }
-

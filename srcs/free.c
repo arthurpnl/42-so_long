@@ -12,26 +12,24 @@
 
 #include "../includes/so_long.h"
 
-void free_pathfinder(t_pathfinder *path, int line_count)
+void	free_pathfinder(t_pathfinder *path, int line_count)
 {
-    int i;
+	int	i;
 
 	i = 0;
-    if (path == NULL || path->visited == NULL)
-        return;
-
-    while (i < line_count)
-    {
-        if (path->visited[i] != NULL)
-        {
-            free(path->visited[i]);
-            path->visited[i] = NULL;
-        }
-        i++;
-    }
-
-    free(path->visited);
-    path->visited = NULL;
+	if (path == NULL || path->visited == NULL)
+		return ;
+	while (i < line_count)
+	{
+		if (path->visited[i] != NULL)
+		{
+			free(path->visited[i]);
+			path->visited[i] = NULL;
+		}
+		i++;
+	}
+	free(path->visited);
+	path->visited = NULL;
 }
 
 void	free_game(t_game *game)
@@ -54,16 +52,16 @@ void	free_game(t_game *game)
 
 int	destroy_free_mlx(t_game *game)
 {
-	if (game->sprite_player)
-		mlx_destroy_image(game->mlx, game->sprite_player);
-	if (game->sprite_wall)
-		mlx_destroy_image(game->mlx, game->sprite_wall);
-	if (game->sprite_ground)
-		mlx_destroy_image(game->mlx, game->sprite_ground);
-	if (game->sprite_collectible)
-		mlx_destroy_image(game->mlx, game->sprite_collectible);
-	if (game->sprite_exit)
-		mlx_destroy_image(game->mlx, game->sprite_exit);
+	if (game->player)
+		mlx_destroy_image(game->mlx, game->player);
+	if (game->wall)
+		mlx_destroy_image(game->mlx, game->wall);
+	if (game->ground)
+		mlx_destroy_image(game->mlx, game->ground);
+	if (game->collect)
+		mlx_destroy_image(game->mlx, game->collect);
+	if (game->exit)
+		mlx_destroy_image(game->mlx, game->exit);
 	if (game)
 	{
 		if (game->window)

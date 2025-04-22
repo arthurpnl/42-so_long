@@ -12,9 +12,9 @@
 
 #include "../includes/so_long.h"
 
-int close_window(t_game *game)
+int	close_window(t_game *game)
 {
-	if(!game)
+	if (!game)
 		return (0);
 	free_game(game);
 	exit(EXIT_SUCCESS);
@@ -23,12 +23,13 @@ int close_window(t_game *game)
 
 void	check_exit_condition(t_game *game)
 {
-
-	if (game->collectible_found == game->collectible_count && game->map[game->player_y][game->player_x] == 'E')
+	if (game->collect_found == game->collect_count
+		&& game->map[game->player_y][game->player_x] == 'E')
 	{
-		ft_printf("Congratulations ! You found all the collectibles and exited the game.\n");
+		ft_printf("You successfully finish the game in %i moves.\n", game->move);
 		close_window(game);
 	}
-	else if (game->collectible_found != game->collectible_count && game->map[game->player_y][game->player_x] == 'E')
-		ft_printf("You need to collect all the collectibles before exiting.\n");
+	else if (game->collect_found != game->collect_count
+		&& game->map[game->player_y][game->player_x] == 'E')
+		ft_printf("Error\nYou need to collect all the collectibles\n");
 }
