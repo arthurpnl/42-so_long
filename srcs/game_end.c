@@ -6,7 +6,7 @@
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:31:29 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/21 20:31:35 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/23 11:41:50 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_exit_condition(t_game *game)
 	if (game->collect_found == game->collect_count
 		&& game->map[game->player_y][game->player_x] == 'E')
 	{
-		ft_printf("You successfully finish the game in %i moves.\n", game->move);
+		ft_printf("You finished the game in %i moves.\n", game->move);
 		close_window(game);
 	}
 	else if (game->collect_found != game->collect_count
