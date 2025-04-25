@@ -6,7 +6,7 @@
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:36 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/10 17:46:15 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:18:32 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char	*extract_line(char *storage)
 char	*clean_n_stock(char *storage)
 {
 	int		i;
-	char	*tmp;
 	char	*new_storage;
 
 	if (!storage)
@@ -78,11 +77,16 @@ char	*clean_n_stock(char *storage)
 		free(storage);
 		return (NULL);
 	}
-	tmp = storage;
+	if (storage[i + 1] == '\0')
+	{
+		free(storage);
+		return (NULL);
+	}
 	new_storage = ft_strdup(storage + i + 1);
-	free(tmp);
+	free(storage);
 	return (new_storage);
 }
+
 
 char	*get_next_line(int fd)
 {
