@@ -74,6 +74,7 @@ bool	is_regular_file(char *file);
 // init //
 void	init_game(t_game *game);
 bool	init_pathfinder(t_game *game, t_pathfinder *path);
+void	null_sprite(t_game *game);
 
 // map parse //
 bool	count_line(char *file, t_game *game);
@@ -105,7 +106,7 @@ int		parser_mlx(t_game *game);
 // free //
 void	free_pathfinder(t_pathfinder *path, int line_count);
 void	free_game(t_game *game);
-int	destroy_free_mlx(t_game *game);
+int	    destroy_free_mlx(t_game *game);
 
 // mlx setup //
 bool	init_mlx(t_game *game);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:26:08 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/10 15:26:08 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:55:31 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ bool	init_pathfinder(t_game *game, t_pathfinder *path)
 		path->i++;
 	}
 	return (SUCCESS);
+}
+
+void	null_sprite(t_game *game)
+{
+	game->player = NULL;
+	game->wall = NULL;
+	game->ground = NULL;
+	game->collect = NULL;
+	game->exit = NULL;
 }
