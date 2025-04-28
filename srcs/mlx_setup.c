@@ -6,7 +6,7 @@
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:27:55 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/25 18:01:11 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:38:10 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ bool	init_sprite(t_game *game)
 
 	w = 64;
 	h = 64;
-	null_sprite(game);
 	game->player = mlx_xpm_file_to_image(game->mlx, "xpm/player.xpm", &w, &h);
 	game->wall = mlx_xpm_file_to_image(game->mlx, "xpm/wall.xpm", &w, &h);
 	game->ground = mlx_xpm_file_to_image(game->mlx, "xpm/ground.xpm", &w, &h);
@@ -49,7 +48,7 @@ bool	init_sprite(t_game *game)
 	game->exit = mlx_xpm_file_to_image(game->mlx, "xpm/exit.xpm", &w, &h);
 	if (!game->player || !game->wall || !game->ground || !game->exit
 		|| !game->collect)
-		return (destroy_free_mlx(game), ft_printf(ERR_LOAD_SPRITE), FAILURE);
+		return (ft_printf(ERR_LOAD_SPRITE), destroy_free_mlx(game), FAILURE);
 	else
 		return (SUCCESS);
 }

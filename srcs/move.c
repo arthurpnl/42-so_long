@@ -6,7 +6,7 @@
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:19:05 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/21 23:43:44 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:38:00 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_move(t_game *game, int y, int x)
 	{
 		if (game->collect_count == game->collect_found)
 		{
-			ft_printf("You finished the game in %i moves.\n", game->move + 1);
+			ft_printf("You finished the game in %i moves.\n", game->move);
 			destroy_free_mlx(game);
 		}
 		else if (game->collect_found != game->collect_count)
@@ -32,6 +32,7 @@ int	check_move(t_game *game, int y, int x)
 			return (FAILURE);
 		}
 	}
+	ft_printf("Move : %i\n", game->move);
 	return (SUCCESS);
 }
 
@@ -51,7 +52,6 @@ int	move_up(t_game *game)
 		game->map[game->player_y][game->player_x] = 'P';
 		game->move++;
 		render_map(game);
-		check_exit_condition(game);
 		return (SUCCESS);
 	}
 	return (FAILURE);
@@ -73,7 +73,6 @@ int	move_down(t_game *game)
 		game->map[game->player_y][game->player_x] = 'P';
 		game->move++;
 		render_map(game);
-		check_exit_condition(game);
 		return (SUCCESS);
 	}
 	return (FAILURE);
@@ -95,7 +94,6 @@ int	move_left(t_game *game)
 		game->map[game->player_y][game->player_x] = 'P';
 		game->move++;
 		render_map(game);
-		check_exit_condition(game);
 		return (SUCCESS);
 	}
 	return (FAILURE);
@@ -117,7 +115,6 @@ int	move_right(t_game *game)
 		game->map[game->player_y][game->player_x] = 'P';
 		game->move++;
 		render_map(game);
-		check_exit_condition(game);
 		return (SUCCESS);
 	}
 	return (FAILURE);

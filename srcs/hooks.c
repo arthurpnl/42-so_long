@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_movement.c                                  :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:06:31 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/21 16:06:31 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:17:19 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int	key_press_hook(int keycode, t_game *game)
 		destroy_free_mlx(game);
 	}
 	select_move(keycode, game);
-	ft_printf("Move : %i\n", game->move);
 	return (0);
 }

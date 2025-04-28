@@ -6,7 +6,7 @@
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:26:08 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/25 17:55:31 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:31:44 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@ void	init_game(t_game *game)
 	game->collect_count = 0;
 	game->collect_found = 0;
 	game->player_count = 0;
-	game->move = 0;
+	game->move = 1;
 	game->mlx = NULL;
 	game->window = NULL;
+	game->player = NULL;
+	game->wall = NULL;
+	game->ground = NULL;
+	game->collect = NULL;
+	game->exit = NULL;
 }
 
 bool	init_pathfinder(t_game *game, t_pathfinder *path)
@@ -52,13 +57,4 @@ bool	init_pathfinder(t_game *game, t_pathfinder *path)
 		path->i++;
 	}
 	return (SUCCESS);
-}
-
-void	null_sprite(t_game *game)
-{
-	game->player = NULL;
-	game->wall = NULL;
-	game->ground = NULL;
-	game->collect = NULL;
-	game->exit = NULL;
 }
