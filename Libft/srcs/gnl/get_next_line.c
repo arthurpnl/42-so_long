@@ -6,7 +6,7 @@
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:36 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/25 17:18:32 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:54:18 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char	*clean_n_stock(char *storage)
 	return (new_storage);
 }
 
-
 char	*get_next_line(int fd)
 {
 	char		*line;
@@ -107,23 +106,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-/*
-int	main(int ac, char **av)
-{
-	int		fd;
-	char	*s;
-
-	if (ac != 2)
-		return (1);
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		return (1);
-	while ((s = get_next_line(fd)) != NULL)
-	{
-		printf("%s", s);
-		free(s);
-	}
-	close(fd);
-	return (0);
-}
-*/

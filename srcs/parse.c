@@ -6,7 +6,7 @@
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 16:56:50 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/25 17:59:24 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:45:31 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	parser_map2(t_game *game)
 	return (SUCCESS);
 }
 
-int	parser_map(t_game	*game, char	**av)
+int	parser_map(t_game *game, char **av)
 {
 	if (is_ber_file(*av) == FAILURE)
 		return (FAILURE);
@@ -60,5 +60,3 @@ int	parser_mlx(t_game *game)
 		return (FAILURE);
 	return (SUCCESS);
 }
-
-

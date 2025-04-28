@@ -6,7 +6,7 @@
 /*   By: arpenel <arpenel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:31:29 by arpenel           #+#    #+#             */
-/*   Updated: 2025/04/28 11:38:04 by arpenel          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:45:19 by arpenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,3 @@ int	close_window(t_game *game)
 	exit(EXIT_SUCCESS);
 	return (0);
 }
-
